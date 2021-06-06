@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToeLibrary
+namespace TicTacToeLibrary.Models
 {
-    class Program
+    public enum GridSpotStatus
     {
-
+        Empty,
+        Player1,
+        Player2
     }
 }

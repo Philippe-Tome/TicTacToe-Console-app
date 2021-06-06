@@ -1,0 +1,7 @@
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\bin\Debug\TicTacToeLibrary.exe.config
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\bin\Debug\TicTacToeLibrary.exe
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\bin\Debug\TicTacToeLibrary.pdb
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\obj\Debug\TicTacToeLibrary.csprojAssemblyReference.cache
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\obj\Debug\TicTacToeLibrary.csproj.CoreCompileInputs.cache
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\obj\Debug\TicTacToeLibrary.exe
+C:\Users\TOMEP\Documents\Personal\TicTacToe Console app\TicTacToeLibrary\obj\Debug\TicTacToeLibrary.pdb
