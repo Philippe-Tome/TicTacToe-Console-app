@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3EA4EEA-016C-4425-83F7-B86B9EF0A2B5}</ProjectGuid>
+    <ProjectGuid>{A49662CD-6AF5-4113-BA4D-AA708D95663B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TicTacToe_Console_app</RootNamespace>
-    <AssemblyName>TicTacToe Console app</AssemblyName>
+    <RootNamespace>TicTacToeLibrary</RootNamespace>
+    <AssemblyName>TicTacToeLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,12 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TicTacToeLibrary\TicTacToeLibrary.csproj">
-      <Project>{a49662cd-6af5-4113-ba4d-aa708d95663b}</Project>
-      <Name>TicTacToeLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

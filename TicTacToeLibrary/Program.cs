@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToe_Console_app
+namespace TicTacToeLibrary
 {
     class Program
     {
         static void Main(string[] args)
         {
-
-
-
         }
     }
 }
