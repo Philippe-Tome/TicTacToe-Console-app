@@ -15,7 +15,7 @@ namespace TicTacToe_Console_app
             PlayerInfoModel p1 = GetUserNameInfo("Player 1");
             PlayerInfoModel p2 = GetUserNameInfo("Player 2");
 
-            string currentPlayer = p1.UserName;
+            int currentPlayer = 1;
 
             string shot = AskForPosition(currentPlayer);
 
@@ -30,10 +30,43 @@ namespace TicTacToe_Console_app
                 Console.WriteLine("Invalid shot location. Please try again.");
             }
 
+            char[] Row_A = new char[4];
+            char[] Row_B = new char[4];
+            char[] Row_C = new char[4];
+
+
+            RecordPlayedPositions(currentPlayer, row, column, Row_A, Row_B, Row_C);
+
             DrawGrid(row, column);
 
             Console.ReadLine();
 
+        }
+
+        private static void RecordPlayedPositions(int currentPlayer, string row, int column, char[] Row_A, char[] Row_B, char[] Row_C)
+        {
+            char marker = 'X';
+
+            if (currentPlayer ==2)
+            {
+                marker = 'O';
+            }
+
+            switch (row) {
+                case "A":
+                    Row_A[column] = marker;
+                    break;
+                case "B":
+                    Row_B[column] = marker;
+                    break;
+                case "C":
+                    Row_C[column] = marker;
+                    break;
+                default:
+                    Console.WriteLine("Row is not A, B or C!!!");
+                    break;
+            }
+     
         }
 
         private static PlayerInfoModel GetUserNameInfo(string playerTitle)
@@ -48,7 +81,7 @@ namespace TicTacToe_Console_app
             return output;
         }
 
-        private static string AskForPosition(string currentPlayer)
+        private static string AskForPosition(int currentPlayer)
         {
             Console.WriteLine($"Hi { currentPlayer } please enter your shot position (ie. A1): ");
             string output = Console.ReadLine().ToUpper();
@@ -65,7 +98,7 @@ namespace TicTacToe_Console_app
             Console.WriteLine(" | |  B");
             Console.WriteLine("-------");
             Console.WriteLine(" | |  C");
-            ConsoleWriteLine();
+            Console.WriteLine();
             Console.WriteLine("1 2 3");
 
             Console.WriteLine();
