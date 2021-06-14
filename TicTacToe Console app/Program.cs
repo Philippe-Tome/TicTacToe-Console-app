@@ -11,33 +11,49 @@ namespace TicTacToe_Console_app
     {
         static void Main(string[] args)
         {
+            char[] Row_A = new char[3];
+            char[] Row_B = new char[3];
+            char[] Row_C = new char[3];
+
+            int count = 0;
 
             PlayerInfoModel p1 = GetUserNameInfo("Player 1");
             PlayerInfoModel p2 = GetUserNameInfo("Player 2");
 
             int currentPlayer = 1;
+            string currentPlayerName = p1.UserName;
 
-            string shot = AskForPosition(currentPlayer);
-
-            string row = "";
-            int column = 0;
-            try
+            while (count != 9)
             {
-                (row, column) = SplitShotIntoRowAndColumn(shot);
+                string shot = AskForPosition(currentPlayerName);
+
+                string row = "";
+                int column = 0;
+                try
+                {
+                    (row, column) = SplitShotIntoRowAndColumn(shot);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Invalid shot location. Please try again.");
+                }
+
+
+                RecordPlayedPositions(currentPlayer, row, column, Row_A, Row_B, Row_C);
+
+                DrawGrid(Row_A, Row_B, Row_C);
+
+                if (currentPlayer == 1)
+                {
+                    currentPlayer = 2;
+                    currentPlayerName = p2.UserName;
+                }
+                else
+                {
+                    currentPlayer = 1;
+                    currentPlayerName = p1.UserName;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Invalid shot location. Please try again.");
-            }
-
-            char[] Row_A = new char[4];
-            char[] Row_B = new char[4];
-            char[] Row_C = new char[4];
-
-
-            RecordPlayedPositions(currentPlayer, row, column, Row_A, Row_B, Row_C);
-
-            DrawGrid(row, column);
 
             Console.ReadLine();
 
@@ -54,13 +70,13 @@ namespace TicTacToe_Console_app
 
             switch (row) {
                 case "A":
-                    Row_A[column] = marker;
+                    Row_A[column - 1] = marker;
                     break;
                 case "B":
-                    Row_B[column] = marker;
+                    Row_B[column - 1] = marker;
                     break;
                 case "C":
-                    Row_C[column] = marker;
+                    Row_C[column - 1] = marker;
                     break;
                 default:
                     Console.WriteLine("Row is not A, B or C!!!");
@@ -81,29 +97,67 @@ namespace TicTacToe_Console_app
             return output;
         }
 
-        private static string AskForPosition(int currentPlayer)
+        private static string AskForPosition(string currentPlayerName)
         {
-            Console.WriteLine($"Hi { currentPlayer } please enter your shot position (ie. A1): ");
+            Console.WriteLine($"Hi { currentPlayerName } please enter your shot position (ie. A1): ");
             string output = Console.ReadLine().ToUpper();
 
             return output;
         }
 
 
-        private static void DrawGrid(string row, int column)
+        private static void DrawGrid(char[] Row_A, char[] Row_B, char[] Row_C)
         {
             Console.WriteLine();
-            Console.WriteLine(" | |  A");
-            Console.WriteLine("-------");
-            Console.WriteLine(" | |  B");
-            Console.WriteLine("-------");
-            Console.WriteLine(" | |  C");
-            Console.WriteLine();
-            Console.WriteLine("1 2 3");
+            Console.Write("A ");
+
+            foreach (var item in Row_A)
+            {
+                if (item == 'X' || item == 'O')
+                {
+                    Console.Write(item + " "); 
+                }
+                else
+                {
+                    Console.Write("_ ");
+                }
+            }
 
             Console.WriteLine();
+            Console.Write("B ");
 
-            Console.WriteLine($"Row is: { row } and the column is : { column }");
+            foreach (var item in Row_B)
+            {
+                if (item == 'X' || item == 'O')
+                {
+                    Console.Write(item + " ");
+                }
+                else
+                {
+                    Console.Write("_ ");
+                }
+            }
+
+            Console.WriteLine();
+            Console.Write("C ");
+
+            foreach (var item in Row_C)
+            {
+                if (item == 'X' || item == 'O')
+                {
+                    Console.Write(item + " ");
+                }
+                else
+                {
+                    Console.Write("_ ");
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            //Console.WriteLine("1 2 3");
+
+            //Console.WriteLine();
         }
 
         private static (string row, int column) SplitShotIntoRowAndColumn(string shot)
