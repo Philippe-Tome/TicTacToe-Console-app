@@ -15,7 +15,9 @@ namespace TicTacToe_Console_app
             char[] Row_B = new char[3];
             char[] Row_C = new char[3];
 
-            int count = 0;
+            bool gameFinished = false;
+
+            int counter = 0;
 
             PlayerInfoModel p1 = GetUserNameInfo("Player 1");
             PlayerInfoModel p2 = GetUserNameInfo("Player 2");
@@ -23,7 +25,9 @@ namespace TicTacToe_Console_app
             int currentPlayer = 1;
             string currentPlayerName = p1.UserName;
 
-            while (count != 9)
+            DrawTemplateGrid();
+
+            while (gameFinished == false)
             {
                 string shot = AskForPosition(currentPlayerName);
 
@@ -53,10 +57,106 @@ namespace TicTacToe_Console_app
                     currentPlayer = 1;
                     currentPlayerName = p1.UserName;
                 }
+
+                gameFinished = CheckIfWinner(Row_A, Row_B, Row_C);
+
+                counter++;
+
+
             }
+
+            Console.WriteLine("Game Finished !!!");
 
             Console.ReadLine();
 
+        }
+
+        private static bool CheckIfWinner(char[] Row_A, char[] Row_B, char[] Row_C)
+        {
+            int XInARowCount = 0;
+            int OInARowCount = 0;
+
+            //------------------------------------------------
+            // Check horizontal lines:
+            foreach (var item in Row_A)
+            {
+                if (item == 'X')
+                {
+                    XInARowCount++;
+                }
+                else if (item == 'O')
+                {
+                    OInARowCount++;
+                }
+            }
+
+            foreach (var item in Row_B)
+            {
+                if (item == 'X')
+                {
+                    XInARowCount++;
+                }
+                else if (item == 'O')
+                {
+                    OInARowCount++;
+                }
+            }
+
+            foreach (var item in Row_C)
+            {
+                if (item == 'X')
+                {
+                    XInARowCount++;
+                }
+                else if (item == 'O')
+                {
+                    OInARowCount++;
+                }
+            }
+            //------------------------------------------------
+            // Check vertical lines:
+            for (int i = 0; i < 3; i++)
+            {
+                if (Row_A[i] == 'X' && Row_B[i] == 'X' && Row_C[i] == 'X')
+                {
+                    XInARowCount = 3;
+                }
+                else if (Row_A[i] == 'O' && Row_B[i] == 'O' && Row_C[i] == 'O')
+                {
+                    OInARowCount = 3;
+                }
+
+            }
+
+
+            //------------------------------------------------
+            if ( XInARowCount == 3 )
+            {
+                Console.WriteLine("The winner is Player 1.");
+
+                return true;
+            }
+            else if ( OInARowCount == 3)
+            {
+                Console.WriteLine("The winner is Player 2.");
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
+
+        private static void DrawTemplateGrid()
+        {
+            Console.WriteLine("A _ _ _");
+            Console.WriteLine("B _ _ _");
+            Console.WriteLine("C _ _ _");
+            Console.WriteLine("  1 2 3");
+            Console.WriteLine();
         }
 
         private static void RecordPlayedPositions(int currentPlayer, string row, int column, char[] Row_A, char[] Row_B, char[] Row_C)
@@ -154,10 +254,9 @@ namespace TicTacToe_Console_app
             }
 
             Console.WriteLine();
+            Console.WriteLine("  1 2 3");
             Console.WriteLine();
-            //Console.WriteLine("1 2 3");
 
-            //Console.WriteLine();
         }
 
         private static (string row, int column) SplitShotIntoRowAndColumn(string shot)
