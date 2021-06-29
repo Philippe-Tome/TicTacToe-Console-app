@@ -17,7 +17,6 @@ namespace TicTacToe_Console_app
 
             bool gameFinished = false;
 
-            int counter = 0;
 
             PlayerInfoModel p1 = GetUserNameInfo("Player 1");
             PlayerInfoModel p2 = GetUserNameInfo("Player 2");
@@ -58,9 +57,8 @@ namespace TicTacToe_Console_app
                     currentPlayerName = p1.UserName;
                 }
 
-                gameFinished = CheckIfWinner(Row_A, Row_B, Row_C);
 
-                counter++;
+                gameFinished = CheckIfWinner(Row_A, Row_B, Row_C);
 
 
             }
@@ -73,85 +71,104 @@ namespace TicTacToe_Console_app
 
         private static bool CheckIfWinner(char[] Row_A, char[] Row_B, char[] Row_C)
         {
-            int XInARowCount = 0;
-            int OInARowCount = 0;
-
             //------------------------------------------------
             // Check horizontal lines:
-            foreach (var item in Row_A)
+            string[] rows = { "Row_A", "Row_B", "Row_C" };
+            char[] symbols = { 'X', 'O' };
+
+            foreach (var row in rows)
             {
-                if (item == 'X')
+                foreach (var symbol in symbols)
                 {
-                    XInARowCount++;
-                }
-                else if (item == 'O')
-                {
-                    OInARowCount++;
-                }
+                    if (row[0] == symbol && row[1] == symbol && row[2] == symbol)
+                    {
+                        if (symbol == 'X')
+                        {
+                            Console.WriteLine("The winner is Player 1.");
+                        }
+                        else if (symbol == 'O')
+                        {
+                            Console.WriteLine("The winner is Player 2.");
+                        }
+                        return true;
+                    }
+                    //else if (Row_B[0] == symbol && Row_B[1] == symbol && Row_B[2] == symbol)
+                    //{
+                    //    if (symbol == 'X')
+                    //    {
+                    //        Console.WriteLine("The winner is Player 1.");
+                    //    }
+                    //    else if (symbol == 'O')
+                    //    {
+                    //        Console.WriteLine("The winner is Player 2.");
+                    //    }
+
+                    //    return true;
+                    //}
+                    //else if (Row_C[0] == symbol && Row_C[1] == symbol && Row_C[2] == symbol)
+                    //{
+                    //    if (symbol == 'X')
+                    //    {
+                    //        Console.WriteLine("The winner is Player 1.");
+                    //    }
+                    //    else if (symbol == 'O')
+                    //    {
+                    //        Console.WriteLine("The winner is Player 2.");
+                    //    }
+                    //    return true;
+                    //}
+
+                } 
             }
 
-            foreach (var item in Row_B)
-            {
-                if (item == 'X')
-                {
-                    XInARowCount++;
-                }
-                else if (item == 'O')
-                {
-                    OInARowCount++;
-                }
-            }
 
-            foreach (var item in Row_C)
-            {
-                if (item == 'X')
-                {
-                    XInARowCount++;
-                }
-                else if (item == 'O')
-                {
-                    OInARowCount++;
-                }
-            }
+
             //------------------------------------------------
             // Check vertical lines:
             for (int i = 0; i < 3; i++)
             {
                 if (Row_A[i] == 'X' && Row_B[i] == 'X' && Row_C[i] == 'X')
                 {
-                    XInARowCount = 3;
+                    //XInARowCount = 3;
+                    Console.WriteLine("The winner is Player 1.");
+
+                    return true;
                 }
                 else if (Row_A[i] == 'O' && Row_B[i] == 'O' && Row_C[i] == 'O')
                 {
-                    OInARowCount = 3;
+                    //OInARowCount = 3;
+                    Console.WriteLine("The winner is Player 2.");
+
+                    return true;
                 }
 
             }
 
-
             //------------------------------------------------
-            if ( XInARowCount == 3 )
+            // Check diagonal lines:
+            if ( Row_A[0] == 'X' && Row_B[1] == 'X' && Row_C[2] == 'X' )
             {
                 Console.WriteLine("The winner is Player 1.");
 
                 return true;
             }
-            else if ( OInARowCount == 3)
+            else if ( Row_A[0] == 'O' && Row_B[1] == 'O' && Row_C[2] == 'O' )
             {
                 Console.WriteLine("The winner is Player 2.");
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            //------------------------------------------------
+
+            return false;
 
 
         }
 
         private static void DrawTemplateGrid()
         {
+            Console.WriteLine();
             Console.WriteLine("A _ _ _");
             Console.WriteLine("B _ _ _");
             Console.WriteLine("C _ _ _");
